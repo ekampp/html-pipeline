@@ -24,6 +24,7 @@ module HTML
     #  # => "<h1>\n<a id=\"ice-cube\" class=\"anchor\" href=\"#ice-cube\">..."
     class TableOfContentsFilter < Filter
       PUNCTUATION_REGEXP = RUBY_VERSION > "1.9" ? /[^\p{Word}\- ]/u : /[^\w\- ]/
+      HEADLINE_LEVELS = %w(h1 h2 h3)
 
       # The icon that will be placed next to an anchored rendered markdown header
       def anchor_icon
@@ -34,7 +35,7 @@ module HTML
         result[:toc] = ""
 
         headers = Hash.new(0)
-        doc.css('h1, h2, h3, h4, h5, h6').each do |node|
+        doc.css(HEADLINE_LEVELS.join(', ')).each do |node|
           text = node.text
           id = text.downcase
           id.gsub!(PUNCTUATION_REGEXP, '') # remove punctuation
