@@ -24,7 +24,7 @@ module HTML
     #  # => "<h1>\n<a id=\"ice-cube\" class=\"anchor\" href=\"#ice-cube\">..."
     class TableOfContentsFilter < Filter
       PUNCTUATION_REGEXP = RUBY_VERSION > "1.9" ? /[^\p{Word}\- ]/u : /[^\w\- ]/
-      HEADLINE_LEVELS = %w(h1 h2 h3)
+      HEADLINE_LEVELS = %w(h1 h2)
 
       # The icon that will be placed next to an anchored rendered markdown header
       def anchor_icon
